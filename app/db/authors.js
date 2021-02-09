@@ -9,34 +9,64 @@ const client = new Client({
 client.connect()
 
 const getAuthors = (req, res) => {
-    client.query("SELECT * FROM authors ORDER BY id DESC", (err, result) => {
-        if (err)
-            throw (err)
+    const query = {
+        text: 'SELECT * FROM authors ORDER BY id DESC',
+    }
+    //callback
+    // client.query("SELECT * FROM authors ORDER BY id DESC", (err, result) => {
+    //     if (err)
+    //         throw (err)
 
-        res.status(200).json({
-            status: "success",
-            data: result.rows
-        })
-    })
+    //     res.status(200).json({
+    //         status: "success",
+    //         data: result.rows
+    //     })
+    // })
+
+    // promise
+    client
+        .query(query)
+        .then(res => console.log(res.rows[0]))
+        .catch(e => console.error(e.stack))
 }
 
-const createAuthor = (req, res) => {
-    const {
-        name,
-        email
-    } = req.body
+// const createAuthor = (req, res) => {
+//     const {
+//         name,
+//         email
+//     } = req.body
 
-    client.query("INSERT INTO authors (name, email) VALUES ($1, $2)", [name, email], (err, results) => {
-        if (err)
-            throw (err)
-        res.status(200).json({
-            status: "success",
-            message: `New author has been added!`
-        })
-    })
-}
+//     client.query("INSERT INTO authors (name, email) VALUES ($1, $2)", [name, email], (err, results) => {
+//         if (err)
+//             throw (err)
+//         res.status(200).json({
+//             status: "success",
+//             message: `New author has been added!`
+//         })
+//     })
+
+//     const query = {
+//         text: 'INSERT INTO authors(name, email) VALUES($1, $2)',
+//         values: ['brianc', 'brian.m.carlson@gmail.com'],
+//     }
+//     // callback
+//     client.query(query, (err, results) => {
+//         if (err)
+//             throw (err)
+//         res.status(200).json({
+//             status: "success",
+//             message: `New author has been added!`
+//         })
+//     })
+
+//     // promise
+//     client
+//         .query(query)
+//         .then(res => console.log(res.rows[0]))
+//         .catch(e => console.error(e.stack))
+// }
 
 module.exports = {
     getAuthors,
-    createAuthor
+    // createAuthor
 }
