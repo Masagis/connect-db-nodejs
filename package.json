@@ -1,0 +1,15 @@
+{
+  "name": "learn-connect-db-node",
+  "version": "1.0.0",
+  "description": "enviroment variable,coba ubah dari callback ke promise, tambahkan update dan delete kalau bisa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "masagis",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  }
+}
